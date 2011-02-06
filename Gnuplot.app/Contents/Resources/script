@@ -1,0 +1,56 @@
+#!/bin/sh
+# Copyright (C) 2007, Thomas Treichl and Paul Kienzle
+# Copyright (C) 2008-2009, Thomas Treichl
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+# 02110-1301 USA
+
+ROOT="${0%/script}"
+
+if [ -z ${GNUTERM} ]; then 
+# This is the startup procedure written as AppleScript to open a
+# Terminal.app (if the Terminal.app is not already running) and start
+# the Gnuplot program.
+# 20071007 removed: open -a /Applications/Utilities/Terminal.app
+osascript 2>&1>/dev/null <<EOF
+  tell application "System Events" to set ProcessList to get name of every process
+  tell application "Terminal" 
+    activate
+    if ProcessList contains "Terminal" then
+      do script ("exec '${ROOT}/bin/gnuplot'")
+    else
+      do script ("exec '${ROOT}/bin/gnuplot'") in front window
+    end if
+  end tell
+EOF
+
+# If you set the variable ${GNUTERM} to "x11" then we try to open the
+# X11 environment and a XTerm with the Gnuplot program running in this
+# XTerm instead of a shell.
+elif [ ${GNUTERM} == "x11" ]; then
+  open "/Applications/Utilities/X11.app"
+  if [ -z ${DISPLAY} ]; then export DISPLAY=:0.0; fi
+  /usr/X11R6/bin/xterm -fn -adobe-courier-medium-*-*-*-14-*-*-*-*-*-*-* \
+    -e "'${ROOT}/bin/gnuplot'";
+fi
+
+# Quit the Gnuplot application immediately after startup (ie. quitting
+# it in the taskbar) because once it is started it cannot be restarted
+# a second time. If Gnuplot.app stays (eg. because of a crash) opened
+# then restarting is not possible.
+osascript 2>&1>/dev/null <<EOF
+  tell application "gnuplot"
+    quit
+  end tell
+EOF

@@ -1,0 +1,43 @@
+Imaxima plugin for Aquamacs
+===========================
+
+This plugin provides support for fancy typesetting in Aquamacs of the
+output from the computer algebra system Maxima.  Details of the
+imaxima and maxima interfaces for Emacs are available from
+http://sites.google.com/site/imaximaimath
+
+The Aquamacs plugin contains the Maxima and Gnuplot binaries, but does
+not include the following components, required for typesetting and
+converting images of mathematical expressions:
+- LaTeX engine
+- Ghostscript
+- mh and expl3 macro packages for LaTeX
+All of these components are included in the MacTeX distribution, from
+http://www.tug.org/mactex/ (tested with MacTeX-2010).  A more minimal
+TeX/LaTeX installation is possible, as described at the imaxima/imath
+website.
+
+This plugin is not recommended for users who already have Gnuplot
+and/or Maxima installed in App bundle form.  The installer (by OS X
+design) may attempt to update or replace Maxima.app or Gnuplot.app if
+already present.  If gnuplot and maxima are already in your $PATH and
+the exec-path in Aquamacs, you will be better served by downloading
+and installing just the Imaxima package from the website given above.
+
+The root directory of the installed plugin is
+/Library/Application Support/Aquamacs Emacs/Imaxima Plugin
+Documentation for imaxima, imath, and Maxima are installed into the
+doc/ subdirectory.  Info files for imaxima, Maxima, and Gnuplot are
+installed into the /info subdirectory.
+
+Aquamacs-specific changes to the imaxima/imath/Maxima defaults:
+- Imaxima uses maxima mode (imaxima-use-maxima-mode-flag t)
+- Maxima saves input history (maxima-save-input-history t);
+  maxima-input-history-file is $HOME/Library/Application
+  Support/Aquamacs Emacs/maxima_history
+- Maxima syntax highlighting is applied in the maxima process buffer
+  (maxima-use-full-color-in-process-buffer t)
+- html files produced in imaxima are generated on user's desktop
+  (imaxima-html-dir "~/Desktop/")
+- MAXIMA_USERDIR (for lisp files with custom Maxima code) is
+  $HOME/Library/Application Support/Aquamacs Emacs/maxima/

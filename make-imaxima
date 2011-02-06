@@ -1,0 +1,129 @@
+#!/bin/sh
+
+## Specify current maxima version number (in file & directory names, etc.)
+MAX_VERSION=5.23.2
+## Specify version number of the Imaxima plugin
+PLUGIN_VERSION=$MAX_VERSION.aq1
+
+## escaped version for find-and-replace use (via perl)
+MAX_VER_ESCAPED=${MAX_VERSION//\./\\\.}
+
+BUILD_DIR=`pwd`
+SBCL=`which sbcl`
+
+PLUGIN_DIR=$BUILD_DIR/imaxima-plugin
+APP_DIR=$PLUGIN_DIR/Maxima.app
+APP_RESOURCES_DIR=$APP_DIR/Contents/Resources
+APP_EMACS_DIR=$APP_RESOURCES_DIR/share/maxima/${MAX_VERSION}/emacs
+
+cd $BUILD_DIR
+
+## Download latest maxima
+curl -L http://sourceforge.net/projects/maxima/files/Maxima-source/${MAX_VERSION}-source/maxima-${MAX_VERSION}.tar.gz/download -o maxima.tar.gz
+
+## Unpack and build maxima
+tar xzf maxima.tar.gz
+rm -rf maxima-src
+mv maxima-${MAX_VERSION} maxima-src
+cd $BUILD_DIR/maxima-src
+./configure --prefix=$ROOT --mandir=$ROOT/man --infodir=$ROOT/info
+make
+make pdf
+## install in specified DESTDIR
+rm -rf $BUILD_DIR/maxima
+make install DESTDIR=$BUILD_DIR/maxima
+
+## copy Gnuplot.app and (old) Maxima.app to fresh directory
+cd $BUILD_DIR
+rm -rf ${PLUGIN_DIR}
+mkdir ${PLUGIN_DIR}
+cp -R Maxima.app ${PLUGIN_DIR}
+cp -R Gnuplot.app ${PLUGIN_DIR}
+
+## update Maxima.app by replacing guts with newly-built components
+cd $BUILD_DIR/maxima
+rm -rf $APP_RESOURCES_DIR/bin
+rm -rf $APP_RESOURCES_DIR/info
+rm -rf $APP_RESOURCES_DIR/lib
+rm -rf $APP_RESOURCES_DIR/libexec
+rm -rf $APP_RESOURCES_DIR/man
+rm -rf $APP_RESOURCES_DIR/share
+
+mv bin $APP_RESOURCES_DIR
+mv info $APP_RESOURCES_DIR
+mv lib $APP_RESOURCES_DIR
+mv libexec $APP_RESOURCES_DIR
+mv man $APP_RESOURCES_DIR
+mv share $APP_RESOURCES_DIR
+
+cd $BUILD_DIR
+rmdir maxima
+
+## Copy build machine's SBCL binary into Maxima.app
+## (avoid runtime dependency on separate SBCL)
+cp -f $SBCL $APP_RESOURCES_DIR/lib/maxima/${MAX_VERSION}/binary-sbcl/
+
+## Update version numbers in 3 files in Maxima.app
+## Copy file originals into the app bundle,
+##  then replace old (static) version number with new
+perl -pi -w -e "s/5\.21\.1/$MAX_VER_ESCAPED/g" $APP_DIR/Contents/Info.plist
+perl -pi -w -e "s/5\.21\.1/$MAX_VER_ESCAPED/g" $APP_RESOURCES_DIR/English.lproj/InfoPlist.strings
+cp -f $BUILD_DIR/Maxima.app/Contents/Resources/bin/maxima $APP_RESOURCES_DIR/bin/maxima
+perl -pi -w -e "s/MAXIMA_VERSION=5\.21\.1/MAXIMA_VERSION=${MAX_VER_ESCAPED}/g" $APP_RESOURCES_DIR/bin/maxima
+
+## Copy 3 elisp files that need fixes out of Maxima.app
+cp -f $APP_EMACS_DIR/imaxima.el $PLUGIN_DIR
+cp -f $APP_EMACS_DIR/imath.el $PLUGIN_DIR
+cp -f $APP_EMACS_DIR/maxima.el $PLUGIN_DIR
+cd $PLUGIN_DIR
+## Patch 3 elisp files
+## 1: Allow spaces in path to maxima: pass args as list instead of single string
+patch -i $BUILD_DIR/lisp/imaxima-el.diff imaxima.el
+## 2: Fix sticky text properties in imath-mode; else text typed immediately
+##  following a maxima/latex contstruct gets hidden by the image
+patch -i $BUILD_DIR/lisp/imath-el.diff imath.el
+## 3: Fix reference to previous version in comint completion fix; 
+##  Uncomment lines for syntax coloring of maxima process buffer; 
+##  Use run-mode-hooks in major modes definition instead of run-hooks.
+patch -i $BUILD_DIR/lisp/maxima-el.diff maxima.el
+
+## Copy new elisp files to plugin directory
+cp $BUILD_DIR/lisp/imaxima-autoloads.el ./
+cp $BUILD_DIR/lisp/site-start.el ./
+## Symlink to untouched elisp & associated files deep with Maxima.app
+ln -s -Ff Maxima.app/Contents/Resources/share/maxima/5.23.2/emacs/maxima-font-lock.el
+ln -s -Ff Maxima.app/Contents/Resources/share/maxima/5.23.2/emacs/imaxima-autoconf-variables.el
+ln -s -Ff Maxima.app/Contents/Resources/share/maxima/5.23.2/emacs/imaxima.lisp
+
+## Symlink to info files
+mkdir $PLUGIN_DIR/info
+cd $PLUGIN_DIR/info
+cp $BUILD_DIR/info-dir ./dir
+ln -s -Ff ../Maxima.app/Contents/Resources/info/imaxima.info
+ln -s -Ff ../Maxima.app/Contents/Resources/info/maxima.info
+ln -s -Ff ../Maxima.app/Contents/Resources/info/maxima.info-1
+ln -s -Ff ../Maxima.app/Contents/Resources/info/maxima.info-2
+ln -s -Ff ../Maxima.app/Contents/Resources/info/maxima.info-3
+ln -s -Ff ../Gnuplot.app/Contents/Resources/share/info/gnuplot.info
+
+## Symlink to doc files
+mkdir $PLUGIN_DIR/doc
+cd $PLUGIN_DIR/doc
+ln -s -Ff ../Maxima.app/Contents/Resources/share/maxima/${MAX_VERSION}/doc/html/maxima.html
+ln -s -Ff ../Maxima.app/Contents/Resources/share/maxima/${MAX_VERSION}/doc/html/intromax.html
+## Copy 2 PDFs from $BUILD_DIR
+cp -f $BUILD_DIR/maxima-src/doc/info/maxima.pdf ./
+cp -f $BUILD_DIR/maxima-src/interfaces/emacs/imaxima/imaxima.pdf ./
+
+## Copy license & readme
+cd $PLUGIN_DIR
+cat $BUILD_DIR/maxima-license-preamble.txt $BUILD_DIR/gpl-3.0.txt > COPYING
+cp $BUILD_DIR/README ./
+
+## Add .nosearch files, to prevent recursively adding directories to emacs load-path
+touch Maxima.app/.nosearch
+touch Gnuplot.app/.nosearch
+
+## package
+cd $BUILD_DIR
+/Developer/usr/bin/packagemaker --root imaxima-plugin --scripts install-scripts --resources install-resources --install-to /Library/Application\ Support/Aquamacs\ Emacs/Imaxima\ Plugin --id org.aquamacs.imaxima-plugin --version $PLUGIN_VERSION --title "Imaxima plugin for Aquamacs" --root-volume-only --target 10.4 --out Aquamacs-Imaxima-${PLUGIN_VERSION}.pkg -v

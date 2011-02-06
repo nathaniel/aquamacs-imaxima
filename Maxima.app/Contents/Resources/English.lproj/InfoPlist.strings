@@ -1,0 +1,4 @@
+CFBundleName = "Maxima";
+CFBundleShortVersionString = "5.21.1";
+CFBundleGetInfoString = "Maxima 5.21.1 App Bundle";
+NSHumanReadableCopyright = "Copyright 2010 William Schelter et al.";

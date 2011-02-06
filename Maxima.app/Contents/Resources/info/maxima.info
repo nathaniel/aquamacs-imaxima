@@ -1,0 +1,346 @@
+This is maxima.info, produced by makeinfo version 4.7 from maxima.texi.
+
+   This is a Texinfo Maxima Manual
+
+   Copyright 1994,2001 William F. Schelter
+
+START-INFO-DIR-ENTRY
+* Maxima: (maxima).     A computer algebra system.
+END-INFO-DIR-ENTRY
+
+
+Indirect:
+maxima.info-1: 245
+maxima.info-2: 969661
+maxima.info-3: 1969353
+
+Tag Table:
+(Indirect)
+Node: Top245
+Node: Introduction to Maxima13454
+Node: Bug Detection and Reporting20803
+Node: Functions and Variables for Bug Detection and Reporting21045
+Node: Help24141
+Node: Lisp and Maxima24365
+Node: Garbage Collection28166
+Node: Documentation28877
+Node: Functions and Variables for Help29892
+Node: Command Line39036
+Node: Introduction to Command Line39238
+Node: Functions and Variables for Command Line48372
+Node: Operators76566
+Node: nary76805
+Node: nofix77340
+Node: postfix77855
+Node: prefix78286
+Node: Arithmetic operators78654
+Node: Relational operators86590
+Node: General operators89258
+Node: Expressions151903
+Node: Introduction to Expressions152196
+Node: Complex153781
+Node: Nouns and Verbs154424
+Node: Identifiers156853
+Node: Strings158993
+Node: Inequality161015
+Node: Syntax161271
+Node: Functions and Variables for Expressions165426
+Node: Simplification230832
+Node: Functions and Variables for Simplification231015
+Node: Plotting256855
+Node: Introduction to Plotting257151
+Node: Plotting Formats258390
+Node: Functions and Variables for Plotting261086
+Node: Plotting Options277483
+Node: Gnuplot Options290947
+Node: Gnuplot_pipes Format Functions294834
+Node: Input and Output295873
+Node: Comments296090
+Node: Files297339
+Node: Functions and Variables for Input and Output297820
+Node: Floating Point364604
+Node: Functions and Variables for Floating Point364794
+Node: Contexts369561
+Node: Functions and Variables for Contexts369728
+Node: Polynomials382423
+Node: Introduction to Polynomials382626
+Node: Functions and Variables for Polynomials385651
+Node: Constants440871
+Node: Functions and Variables for Constants441038
+Node: Logarithms445689
+Node: Functions and Variables for Logarithms445861
+Node: Trigonometric454055
+Node: Introduction to Trigonometric454278
+Node: Functions and Variables for Trigonometric455227
+Node: Special Functions469283
+Node: Introduction to Special Functions469732
+Node: Bessel Functions471836
+Node: Airy Functions478292
+Node: Gamma and factorial Functions479433
+Node: Exponential Integrals507008
+Node: Error Function508458
+Node: Struve Functions510269
+Node: Hypergeometric Functions510768
+Node: Parabolic Cylinder Functions513118
+Node: Functions and Variables for Special Functions513712
+Node: Elliptic Functions520656
+Node: Introduction to Elliptic Functions and Integrals520965
+Node: Functions and Variables for Elliptic Functions524760
+Node: Functions and Variables for Elliptic Integrals527451
+Ref: elliptic_f527697
+Ref: elliptic_e527915
+Ref: elliptic_eu528153
+Ref: elliptic_kc528750
+Ref: elliptic_ec529038
+Node: Limits529325
+Node: Functions and Variables for Limits529492
+Node: Differentiation532900
+Node: Functions and Variables for Differentiation533087
+Node: Integration559231
+Node: Introduction to Integration559511
+Node: Functions and Variables for Integration560495
+Node: Introduction to QUADPACK585954
+Ref: Introduction to QUADPACK-Footnote-1589455
+Ref: Introduction to QUADPACK-Footnote-2589521
+Ref: Introduction to QUADPACK-Footnote-3589587
+Ref: Introduction to QUADPACK-Footnote-4589631
+Ref: Introduction to QUADPACK-Footnote-5589693
+Ref: Introduction to QUADPACK-Footnote-6589732
+Ref: Introduction to QUADPACK-Footnote-7589773
+Node: Functions and Variables for QUADPACK589958
+Node: Equations609091
+Node: Functions and Variables for Equations609270
+Ref: allroots615696
+Node: Differential Equations649495
+Node: Introduction to Differential Equations649754
+Node: Functions and Variables for Differential Equations650371
+Node: Numerical658443
+Node: Introduction to fast Fourier transform658755
+Node: Functions and Variables for fast Fourier transform659120
+Node: Introduction to Fourier series674591
+Node: Functions and Variables for Fourier series675080
+Node: Arrays678237
+Node: Functions and Variables for Arrays678407
+Node: Matrices and Linear Algebra698421
+Node: Introduction to Matrices and Linear Algebra698699
+Node: Dot699045
+Node: Vectors700455
+Node: eigen701434
+Node: Functions and Variables for Matrices and Linear Algebra702226
+Node: Affine754085
+Node: Introduction to Affine754280
+Node: Functions and Variables for Affine754519
+Node: itensor759941
+Node: Introduction to itensor760120
+Node: Functions and Variables for itensor772807
+Node: ctensor843191
+Node: Introduction to ctensor843371
+Node: Functions and Variables for ctensor847762
+Node: atensor907014
+Node: Introduction to atensor907193
+Node: Functions and Variables for atensor911113
+Node: Series916653
+Node: Introduction to Series916853
+Node: Functions and Variables for Series917372
+Node: Poisson series945416
+Node: Number Theory948941
+Node: Functions and Variables for Number Theory949119
+Node: Symmetries968008
+Node: Introduction to Symmetries968208
+Node: Functions and Variables for Symmetries969661
+Node: Groups1005910
+Node: Functions and Variables for Groups1006073
+Node: Runtime Environment1008011
+Node: Introduction for Runtime Environment1008280
+Node: Interrupts1009396
+Node: Functions and Variables for Runtime Environment1010511
+Node: Miscellaneous Options1017108
+Node: Introduction to Miscellaneous Options1017391
+Node: Share1017803
+Node: Functions and Variables for Miscellaneous Options1018483
+Node: Rules and Patterns1031659
+Node: Introduction to Rules and Patterns1031906
+Node: Functions and Variables for Rules and Patterns1032937
+Node: Lists1076310
+Node: Introduction to Lists1076488
+Node: Functions and Variables for Lists1077344
+Node: Sets1091572
+Node: Introduction to Sets1091747
+Node: Functions and Variables for Sets1101440
+Ref: adjoin1101619
+Ref: belln1102096
+Ref: cardinality1103079
+Ref: cartesian_product1103611
+Ref: disjoin1104325
+Ref: disjointp1105008
+Ref: divisors1105394
+Ref: elementp1106968
+Ref: emptyp1107357
+Ref: equiv_classes1107675
+Ref: every1109021
+Ref: extremal_subset1111825
+Ref: flatten1112577
+Ref: full_listify1115160
+Ref: fullsetify1115691
+Ref: identity1116281
+Ref: integer_partitions1116556
+Ref: intersect1118410
+Ref: intersection1118515
+Ref: listify1123608
+Ref: lreduce1124021
+Ref: makeset1125358
+Ref: moebius1126964
+Ref: multinomial_coeff1128182
+Ref: num_distinct_partitions1129452
+Ref: num_partitions1130292
+Ref: partition_set1131187
+Ref: permutations1131930
+Ref: powerset1132496
+Ref: rreduce1134375
+Ref: setdifference1135823
+Ref: setequalp1136691
+Ref: setify1137315
+Ref: setp1137894
+Ref: set_partitions1138436
+Ref: some1140053
+Ref: stirling11142968
+Ref: stirling21144948
+Ref: subset1147281
+Ref: subsetp1147888
+Ref: symmdifference1148281
+Ref: tree_reduce1149320
+Ref: union1150631
+Ref: xreduce1151608
+Node: Function Definition1153284
+Node: Introduction to Function Definition1153550
+Node: Function1153769
+Node: Macros1158583
+Node: Functions and Variables for Function Definition1167355
+Node: Program Flow1222439
+Node: Introduction to Program Flow1222658
+Node: Functions and Variables for Program Flow1222969
+Node: Debugging1250412
+Node: Source Level Debugging1250638
+Node: Keyword Commands1254503
+Node: Functions and Variables for Debugging1256714
+Node: augmented_lagrangian1265565
+Node: Functions and Variables for augmented_lagrangian1265768
+Node: bode1269681
+Node: Functions and Variables for bode1269838
+Node: contrib_ode1273055
+Node: Introduction to contrib_ode1273359
+Node: Functions and Variables for contrib_ode1278743
+Node: Possible improvements to contrib_ode1283651
+Node: Test cases for contrib_ode1284771
+Node: References for contrib_ode1285538
+Node: descriptive1287091
+Node: Introduction to descriptive1287481
+Node: Functions and Variables for data manipulation1292563
+Node: Functions and Variables for descriptive statistics1300448
+Node: Functions and Variables for specific multivariate descriptive statistics1317605
+Node: Functions and Variables for statistical graphs1327595
+Node: diag1337813
+Node: Functions and Variables for diag1337957
+Node: distrib1354900
+Node: Introduction to distrib1355146
+Node: Functions and Variables for continuous distributions1361226
+Node: Functions and Variables for discrete distributions1418488
+Node: draw1438368
+Node: Introduction to draw1438616
+Node: Functions and Variables for draw1439090
+Node: Functions and Variables for pictures1549253
+Node: Functions and Variables for worldmap1553513
+Node: dynamics1559162
+Node: Introduction to dynamics1559344
+Node: Functions and Variables for dynamics1560939
+Node: ezunits1576599
+Node: Introduction to ezunits1576815
+Node: Introduction to physical_constants1580439
+Node: Functions and Variables for ezunits1585157
+Node: f901612907
+Node: Functions and Variables for f901613039
+Node: ggf1614956
+Node: Functions and Variables for ggf1615087
+Node: graphs1616854
+Node: Introduction to graphs1617025
+Node: Functions and Variables for graphs1618094
+Node: grobner1666735
+Node: Introduction to grobner1666916
+Node: Functions and Variables for grobner1668751
+Node: impdiff1682367
+Node: Functions and Variables for impdiff1682525
+Node: implicit_plot1683159
+Node: Functions and Variables for implicit_plot1683336
+Node: interpol1684427
+Node: Introduction to interpol1684617
+Node: Functions and Variables for interpol1685019
+Node: lapack1697879
+Node: Introduction to lapack1698053
+Node: Functions and Variables for lapack1698364
+Node: lbfgs1707378
+Node: Introduction to lbfgs1707549
+Node: Functions and Variables for lbfgs1708561
+Node: lindstedt1723935
+Node: Functions and Variables for lindstedt1724099
+Node: linearalgebra1725619
+Node: Introduction to linearalgebra1725832
+Node: Functions and Variables for linearalgebra1730357
+Node: lsquares1756610
+Node: Introduction to lsquares1756804
+Node: Functions and Variables for lsquares1757134
+Node: makeOrders1778568
+Node: Functions and Variables for makeOrders1778733
+Node: mnewton1779735
+Node: Introduction to mnewton1779922
+Node: Functions and Variables for mnewton1780217
+Node: numericalio1781878
+Node: Introduction to numericalio1782150
+Node: Functions and Variables for plain-text input and output1786211
+Node: Functions and Variables for binary input and output1791188
+Node: opsubst1794802
+Node: Functions and Variables for opsubst1794960
+Node: orthopoly1797407
+Node: Introduction to orthogonal polynomials1797622
+Ref: Floating point Evaluation1808249
+Node: Functions and Variables for orthogonal polynomials1815388
+Node: plotdf1823054
+Node: Introduction to plotdf1823231
+Node: Functions and Variables for plotdf1825225
+Node: romberg1834052
+Node: Functions and Variables for romberg1834203
+Node: simplex1841111
+Node: Introduction to simplex1841298
+Node: Functions and Variables for simplex1841782
+Node: simplification1845562
+Node: Introduction to simplification1845863
+Node: Package absimp1846240
+Node: Package facexp1847297
+Node: Package functs1853213
+Node: Package ineq1858235
+Node: Package rducon1862783
+Node: Package scifac1864303
+Node: Package sqdnst1865430
+Node: solve_rec1866573
+Node: Introduction to solve_rec1866768
+Node: Functions and Variables for solve_rec1867484
+Node: stats1875970
+Node: Introduction to stats1876246
+Node: Functions and Variables for inference_result1877365
+Node: Functions and Variables for stats1882138
+Node: Functions and Variables for special distributions1917103
+Node: stirling1918311
+Node: Functions and Variables for stirling1918468
+Node: stringproc1921118
+Node: Introduction to string processing1921407
+Node: Functions and Variables for input and output1924871
+Node: Functions and Variables for characters1930740
+Node: Functions and Variables for strings1933694
+Node: unit1945771
+Node: Introduction to Units1945944
+Node: Functions and Variables for Units1949637
+Node: zeilberger1969141
+Node: Introduction to zeilberger1969353
+Node: Functions and Variables for zeilberger1971306
+Node: Function and Variable Index1977129
+
+End Tag Table

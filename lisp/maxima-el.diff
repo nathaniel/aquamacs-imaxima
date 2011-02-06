@@ -1,0 +1,38 @@
+--- share/maxima/5.23.2/emacs/maxima.el	2011-02-08 00:40:44.000000000 -0600
++++ maxima.el	2011-02-13 07:31:29.000000000 -0600
+@@ -2103,6 +2103,7 @@
+ ;;; The next functions are from comint.el in cvs emacs
+ (if (and
+      (not maxima-running-xemacs)
++     (<= emacs-major-version 21)
+      (or
+       (< emacs-major-version 21)
+       (< emacs-minor-version 3)))
+@@ -2645,7 +2646,7 @@
+                       'maxima-mode-add-remove-highlight)
+     (add-hook 'post-command-hook
+               'maxima-mode-add-remove-highlight nil t))
+-  (run-hooks 'maxima-mode-hook))
++  (run-mode-hooks 'maxima-mode-hook))
+ 
+ (define-derived-mode maxima-noweb-mode maxima-mode
+   "Maxima Noweb Mode"
+@@ -3263,8 +3264,8 @@
+ \\[comint-next-matching-input] will bring the next input matching
+   a regular expression to the prompt.
+ "
+-;  (if maxima-use-full-color-in-process-buffer
+-;      (inferior-maxima-font-setup))
++ (if maxima-use-full-color-in-process-buffer
++     (inferior-maxima-font-setup))
+   (setq comint-prompt-regexp inferior-maxima-prompt)
+   (setq comint-get-old-input (function inferior-maxima-get-old-input))
+   (setq mode-line-process '(": %s"))
+@@ -3297,7 +3298,7 @@
+         (set-process-sentinel inferior-maxima-process
+                               'inferior-maxima-sentinel)))
+   (set (make-local-variable 'comint-prompt-read-only) t)
+-  (run-hooks 'inferior-maxima-mode-hook))
++  (run-mode-hooks 'inferior-maxima-mode-hook))
+ 
+ ;;;; Keymap

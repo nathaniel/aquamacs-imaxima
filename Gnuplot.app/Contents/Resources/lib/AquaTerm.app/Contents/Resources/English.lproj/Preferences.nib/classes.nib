@@ -1,0 +1,31 @@
+{
+    IBClasses = (
+        {
+            ACTIONS = {
+                OKButtonPressed = id; 
+                cancelButtonPressed = id; 
+                linewidthSliderMoved = id; 
+                updateTitleExample = id; 
+                windowClosingChanged = id; 
+            }; 
+            CLASS = AQTPrefController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                closeWindowSwitch = NSButton; 
+                confirmCloseWindowSwitch = NSButton; 
+                convertSymbolFontSwitch = NSButton; 
+                imageInterpolateLevel = NSPopUpButton; 
+                linewidthDisplay = NSTextField; 
+                minimumLinewidthSlider = NSSlider; 
+                prefWindow = NSWindow; 
+                shouldAntialiasSwitch = NSButton; 
+                showProcessIdSwitch = NSButton; 
+                showProcessNameSwitch = NSButton; 
+                titleExample = NSTextField; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}
