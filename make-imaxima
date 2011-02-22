@@ -26,7 +26,7 @@ tar xzf maxima.tar.gz
 rm -rf maxima-src
 mv maxima-${MAX_VERSION} maxima-src
 cd $BUILD_DIR/maxima-src
-./configure --prefix=$ROOT --mandir=$ROOT/man --infodir=$ROOT/info
+./configure --prefix=$ROOT --mandir=$ROOT/man --infodir=$ROOT/info --enable-sbcl
 make
 make pdf
 ## install in specified DESTDIR
