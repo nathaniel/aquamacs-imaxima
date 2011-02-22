@@ -3,7 +3,7 @@
 ## Specify current maxima version number (in file & directory names, etc.)
 MAX_VERSION=5.23.2
 ## Specify version number of the Imaxima plugin
-PLUGIN_VERSION=$MAX_VERSION.aq1
+PLUGIN_VERSION=${MAX_VERSION}_aq.b1
 
 ## escaped version for find-and-replace use (via perl)
 MAX_VER_ESCAPED=${MAX_VERSION//\./\\\.}
