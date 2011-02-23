@@ -118,14 +118,14 @@ cp -f $BUILD_DIR/maxima-src/interfaces/emacs/imaxima/imaxima.pdf ./
 cd $PLUGIN_DIR
 cat $BUILD_DIR/maxima-license-preamble.txt $BUILD_DIR/gpl-3.0.txt > COPYING
 cp $BUILD_DIR/README ./
-perl -pi -w -e "s/#maxima-version#/$MAXIMA_VERSION/g" README
+perl -pi -w -e "s/#plugin-version#/$PLUGIN_VERSION/g" README
 perl -pi -w -e "s/#gnuplot-version#/$GNUPLOT_VERSION/g" README
 perl -pi -w -e "s/#maxima-version#/$MAXIMA_VERSION/g" README
 ## the following copy of ReadMe.rtf is displayed by installer
 mkdir -p $BUILD_DIR/install-resources
 cd $BUILD_DIR/install-resources
 cp -f $BUILD_DIR/ReadMe.rtf ./
-perl -pi -w -e "s/#maxima-version#/$MAXIMA_VERSION/g" ReadMe.rtf
+perl -pi -w -e "s/#plugin-version#/$PLUGIN_VERSION/g" ReadMe.rtf
 perl -pi -w -e "s/#gnuplot-version#/$GNUPLOT_VERSION/g" ReadMe.rtf
 perl -pi -w -e "s/#maxima-version#/$MAXIMA_VERSION/g" ReadMe.rtf
 
