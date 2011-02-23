@@ -4,10 +4,10 @@ version #plugin-version#
 
 This plugin provides support for fancy typesetting in Aquamacs of the
 output from the computer algebra system Maxima.  Details of the
-imaxima and maxima interfaces for Emacs are available from
+imaxima and imath interfaces for Emacs are available from
 http://sites.google.com/site/imaximaimath
 
-The Aquamacs plugin contains the Maxima and Gnuplot binaries, but does
+The Aquamacs plugin contains Maxima and Gnuplot binaries, but does
 not include the following components, required for typesetting and
 converting images of mathematical expressions:
 - LaTeX engine
@@ -19,11 +19,10 @@ TeX/LaTeX installation is possible, as described at the imaxima/imath
 website.
 
 This plugin is not recommended for users who already have Gnuplot
-and/or Maxima installed in App bundle form.  The installer (by OS X
-design) may attempt to update or replace Maxima.app or Gnuplot.app if
-already present.  If gnuplot and maxima are already in your $PATH and
-the exec-path in Aquamacs, you will be better served by downloading
-and installing just the Imaxima package from the website given above.
+and Maxima installed; it will create new, duplicate versions of those
+programs on your computer.  You may be better served by downloading
+and installing just the Imaxima package from the website given above,
+with the proper changes to $PATH and other relevant settings.
 
 The root directory of the installed plugin is
 /Library/Application Support/Aquamacs Emacs/Imaxima Plugin

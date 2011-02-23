@@ -136,7 +136,16 @@ touch Gnuplot.app/.nosearch
 
 ## package
 cd $BUILD_DIR
+## doesn't seem to create new pkg if old one still exists
+rm -rf Aquamacs-Imaxima-${PLUGIN_VERSION}.pkg
 /Developer/usr/bin/packagemaker --root imaxima-plugin --scripts install-scripts --resources install-resources --install-to /Library/Application\ Support/Aquamacs\ Emacs/Imaxima\ Plugin --id org.aquamacs.imaxima-plugin --version $PLUGIN_VERSION --title "Imaxima plugin for Aquamacs" --root-volume-only --target 10.4 --out Aquamacs-Imaxima-${PLUGIN_VERSION}.pkg -v
 
-# archive
+## Remove two files/settings to prevent pkg's .app bundles from being "relocatable"
+## Otherwise Gnuplot.app or Maxima.app may be written over User's existing
+##   version in another location.  This would also prevent plugin from working.
+## See http://lists.apple.com/archives/Installer-dev/2009/May/msg00020.html
+rm -f ./Aquamacs-Imaxima-${PLUGIN_VERSION}.pkg/Contents/Resources/TokenDefinitions.plist
+/usr/libexec/PlistBuddy -c "Delete IFPkgPathMappings" ./Aquamacs-Imaxima-${PLUGIN_VERSION}.pkg/Contents/Info.plist
+
+## archive
 tar czvf Aquamacs-Imaxima-${PLUGIN_VERSION}.pkg.tgz Aquamacs-Imaxima-${PLUGIN_VERSION}.pkg
