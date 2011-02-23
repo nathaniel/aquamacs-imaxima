@@ -127,3 +127,6 @@ touch Gnuplot.app/.nosearch
 ## package
 cd $BUILD_DIR
 /Developer/usr/bin/packagemaker --root imaxima-plugin --scripts install-scripts --resources install-resources --install-to /Library/Application\ Support/Aquamacs\ Emacs/Imaxima\ Plugin --id org.aquamacs.imaxima-plugin --version $PLUGIN_VERSION --title "Imaxima plugin for Aquamacs" --root-volume-only --target 10.4 --out Aquamacs-Imaxima-${PLUGIN_VERSION}.pkg -v
+
+# archive
+tar czvf Aquamacs-Imaxima-${PLUGIN_VERSION}.pkg.tgz Aquamacs-Imaxima-${PLUGIN_VERSION}.pkg
