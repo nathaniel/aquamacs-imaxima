@@ -121,6 +121,8 @@ cp $BUILD_DIR/README ./
 perl -pi -w -e "s/#maxima-version#/$MAXIMA_VERSION/g" README
 perl -pi -w -e "s/#gnuplot-version#/$GNUPLOT_VERSION/g" README
 perl -pi -w -e "s/#maxima-version#/$MAXIMA_VERSION/g" README
+## the following copy of ReadMe.rtf is displayed by installer
+mkdir -p $BUILD_DIR/install-resources
 cd $BUILD_DIR/install-resources
 cp -f $BUILD_DIR/ReadMe.rtf ./
 perl -pi -w -e "s/#maxima-version#/$MAXIMA_VERSION/g" ReadMe.rtf

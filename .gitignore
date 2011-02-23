@@ -1,5 +1,6 @@
 maxima-src/
 imaxima-plugin/
-Imaxima\ Plugin/
+install-resources/
 maxima.tar.gz
 Aquamacs-Imaxima-*.pkg
+Aquamacs-Imaxima-*.tgz
