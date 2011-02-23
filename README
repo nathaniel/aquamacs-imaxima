@@ -1,5 +1,6 @@
 Imaxima plugin for Aquamacs
 ===========================
+version #plugin-version#
 
 This plugin provides support for fancy typesetting in Aquamacs of the
 output from the computer algebra system Maxima.  Details of the
@@ -41,3 +42,7 @@ Aquamacs-specific changes to the imaxima/imath/Maxima defaults:
   (imaxima-html-dir "~/Desktop/")
 - MAXIMA_USERDIR (for lisp files with custom Maxima code) is
   $HOME/Library/Application Support/Aquamacs Emacs/maxima/
+
+The plugin contains the following versions:
+Maxima: #maxima-version#
+Gnuplot: #gnuplot-version#

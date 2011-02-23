@@ -1,12 +1,11 @@
 #!/bin/sh
 
 ## Specify current maxima version number (in file & directory names, etc.)
-MAX_VERSION=5.23.2
+MAXIMA_VERSION=5.23.2
 ## Specify version number of the Imaxima plugin
-PLUGIN_VERSION=${MAX_VERSION}_aq.b1
-
-## escaped version for find-and-replace use (via perl)
-MAX_VER_ESCAPED=${MAX_VERSION//\./\\\.}
+PLUGIN_VERSION=${MAXIMA_VERSION}_beta1
+## Specify version number of gnuplot (only goes in to README)
+GNUPLOT_VERSION=4.2.6
 
 BUILD_DIR=`pwd`
 SBCL=`which sbcl`
@@ -14,17 +13,17 @@ SBCL=`which sbcl`
 PLUGIN_DIR=$BUILD_DIR/imaxima-plugin
 APP_DIR=$PLUGIN_DIR/Maxima.app
 APP_RESOURCES_DIR=$APP_DIR/Contents/Resources
-APP_EMACS_DIR=$APP_RESOURCES_DIR/share/maxima/${MAX_VERSION}/emacs
+APP_EMACS_DIR=$APP_RESOURCES_DIR/share/maxima/${MAXIMA_VERSION}/emacs
 
 cd $BUILD_DIR
 
 ## Download latest maxima
-curl -L http://sourceforge.net/projects/maxima/files/Maxima-source/${MAX_VERSION}-source/maxima-${MAX_VERSION}.tar.gz/download -o maxima.tar.gz
+curl -L http://sourceforge.net/projects/maxima/files/Maxima-source/${MAXIMA_VERSION}-source/maxima-${MAXIMA_VERSION}.tar.gz/download -o maxima.tar.gz
 
 ## Unpack and build maxima
 tar xzf maxima.tar.gz
 rm -rf maxima-src
-mv maxima-${MAX_VERSION} maxima-src
+mv maxima-${MAXIMA_VERSION} maxima-src
 cd $BUILD_DIR/maxima-src
 ./configure --prefix=$ROOT --mandir=$ROOT/man --infodir=$ROOT/info --enable-sbcl
 make
@@ -61,15 +60,15 @@ rmdir maxima
 
 ## Copy build machine's SBCL binary into Maxima.app
 ## (avoid runtime dependency on separate SBCL)
-cp -f $SBCL $APP_RESOURCES_DIR/lib/maxima/${MAX_VERSION}/binary-sbcl/
+cp -f $SBCL $APP_RESOURCES_DIR/lib/maxima/${MAXIMA_VERSION}/binary-sbcl/
 
 ## Update version numbers in 3 files in Maxima.app
 ## Copy file originals into the app bundle,
 ##  then replace old (static) version number with new
-perl -pi -w -e "s/5\.21\.1/$MAX_VER_ESCAPED/g" $APP_DIR/Contents/Info.plist
-perl -pi -w -e "s/5\.21\.1/$MAX_VER_ESCAPED/g" $APP_RESOURCES_DIR/English.lproj/InfoPlist.strings
+perl -pi -w -e "s/5\.21\.1/$MAXIMA_VERSION/g" $APP_DIR/Contents/Info.plist
+perl -pi -w -e "s/5\.21\.1/$MAXIMA_VERSION/g" $APP_RESOURCES_DIR/English.lproj/InfoPlist.strings
 cp -f $BUILD_DIR/Maxima.app/Contents/Resources/bin/maxima $APP_RESOURCES_DIR/bin/maxima
-perl -pi -w -e "s/MAXIMA_VERSION=5\.21\.1/MAXIMA_VERSION=${MAX_VER_ESCAPED}/g" $APP_RESOURCES_DIR/bin/maxima
+perl -pi -w -e "s/MAXIMA_VERSION=5\.21\.1/MAXIMA_VERSION=${MAXIMA_VERSION}/g" $APP_RESOURCES_DIR/bin/maxima
 
 ## Copy 3 elisp files that need fixes out of Maxima.app
 cp -f $APP_EMACS_DIR/imaxima.el $PLUGIN_DIR
@@ -109,18 +108,27 @@ ln -s -Ff ../Gnuplot.app/Contents/Resources/share/info/gnuplot.info
 ## Symlink to doc files
 mkdir $PLUGIN_DIR/doc
 cd $PLUGIN_DIR/doc
-ln -s -Ff ../Maxima.app/Contents/Resources/share/maxima/${MAX_VERSION}/doc/html/maxima.html
-ln -s -Ff ../Maxima.app/Contents/Resources/share/maxima/${MAX_VERSION}/doc/html/intromax.html
+ln -s -Ff ../Maxima.app/Contents/Resources/share/maxima/${MAXIMA_VERSION}/doc/html/maxima.html
+ln -s -Ff ../Maxima.app/Contents/Resources/share/maxima/${MAXIMA_VERSION}/doc/html/intromax.html
 ## Copy 2 PDFs from $BUILD_DIR
 cp -f $BUILD_DIR/maxima-src/doc/info/maxima.pdf ./
 cp -f $BUILD_DIR/maxima-src/interfaces/emacs/imaxima/imaxima.pdf ./
 
-## Copy license & readme
+## Copy license & README; update version numbers in README files
 cd $PLUGIN_DIR
 cat $BUILD_DIR/maxima-license-preamble.txt $BUILD_DIR/gpl-3.0.txt > COPYING
 cp $BUILD_DIR/README ./
+perl -pi -w -e "s/#maxima-version#/$MAXIMA_VERSION/g" README
+perl -pi -w -e "s/#gnuplot-version#/$GNUPLOT_VERSION/g" README
+perl -pi -w -e "s/#maxima-version#/$MAXIMA_VERSION/g" README
+cd $BUILD_DIR/install-resources
+cp -f $BUILD_DIR/ReadMe.rtf ./
+perl -pi -w -e "s/#maxima-version#/$MAXIMA_VERSION/g" ReadMe.rtf
+perl -pi -w -e "s/#gnuplot-version#/$GNUPLOT_VERSION/g" ReadMe.rtf
+perl -pi -w -e "s/#maxima-version#/$MAXIMA_VERSION/g" ReadMe.rtf
 
 ## Add .nosearch files, to prevent recursively adding directories to emacs load-path
+cd $PLUGIN_DIR
 touch Maxima.app/.nosearch
 touch Gnuplot.app/.nosearch
 
