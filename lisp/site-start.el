@@ -1,7 +1,8 @@
 (require 'imaxima-autoloads)
 
 (setq imaxima-plugin-dir
-      "/Library/Application Support/Aquamacs Emacs/Imaxima Plugin")
+      (or (file-name-directory load-file-name)
+	  (locate-library "imaxima")))
 ;; set PATH to include Gnuplot and Maxima binaries in Imaxima-Plugin
 ;; update Emacs' `exec-path' as well
 (setenv "PATH" (concat
