@@ -7,11 +7,11 @@
 ;; update Emacs' `exec-path' as well
 (setenv "PATH" (concat
 		(getenv "PATH")
-		":" imaxima-plugin-dir "/Maxima.app/Contents/Resources/bin"
+		":" imaxima-plugin-dir "/Maxima.app/Contents/Resources/maxima/bin"
 		":" imaxima-plugin-dir "/Gnuplot.app/Contents/Resources/bin"))
 (setq exec-path (append exec-path
 			(list (concat imaxima-plugin-dir
-				      "/Maxima.app/Contents/Resources/bin")
+				      "/Maxima.app/Contents/Resources/maxima/bin")
 			      (concat imaxima-plugin-dir
 				      "/Gnuplot.app/Contents/Resources/bin"))))
 ;; set path for AquaTerm, for Gnuplot when not used inline from Maxima
