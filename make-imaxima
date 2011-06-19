@@ -13,7 +13,7 @@ SBCL=`which sbcl`
 PLUGIN_DIR=$BUILD_DIR/imaxima-plugin
 APP_DIR=$PLUGIN_DIR/Maxima.app
 APP_RESOURCES_DIR=$APP_DIR/Contents/Resources
-APP_EMACS_DIR=$APP_RESOURCES_DIR/share/maxima/${MAXIMA_VERSION}/emacs
+APP_EMACS_DIR=$APP_RESOURCES_DIR/maxima/share/maxima/${MAXIMA_VERSION}/emacs
 
 cd $BUILD_DIR
 
@@ -41,34 +41,34 @@ cp -R Gnuplot.app ${PLUGIN_DIR}
 
 ## update Maxima.app by replacing guts with newly-built components
 cd $BUILD_DIR/maxima
-rm -rf $APP_RESOURCES_DIR/bin
-rm -rf $APP_RESOURCES_DIR/info
-rm -rf $APP_RESOURCES_DIR/lib
-rm -rf $APP_RESOURCES_DIR/libexec
-rm -rf $APP_RESOURCES_DIR/man
-rm -rf $APP_RESOURCES_DIR/share
+rm -rf $APP_RESOURCES_DIR/maxima/bin
+rm -rf $APP_RESOURCES_DIR/maxima/info
+rm -rf $APP_RESOURCES_DIR/maxima/lib
+rm -rf $APP_RESOURCES_DIR/maxima/libexec
+rm -rf $APP_RESOURCES_DIR/maxima/man
+rm -rf $APP_RESOURCES_DIR/maxima/share
 
-mv bin $APP_RESOURCES_DIR
-mv info $APP_RESOURCES_DIR
-mv lib $APP_RESOURCES_DIR
-mv libexec $APP_RESOURCES_DIR
-mv man $APP_RESOURCES_DIR
-mv share $APP_RESOURCES_DIR
+mv bin $APP_RESOURCES_DIR/maxima
+mv info $APP_RESOURCES_DIR/maxima
+mv lib $APP_RESOURCES_DIR/maxima
+mv libexec $APP_RESOURCES_DIR/maxima
+mv man $APP_RESOURCES_DIR/maxima
+mv share $APP_RESOURCES_DIR/maxima
 
 cd $BUILD_DIR
 rmdir maxima
 
 ## Copy build machine's SBCL binary into Maxima.app
 ## (avoid runtime dependency on separate SBCL)
-cp -f $SBCL $APP_RESOURCES_DIR/lib/maxima/${MAXIMA_VERSION}/binary-sbcl/
+cp -f $SBCL $APP_RESOURCES_DIR/maxima/lib/maxima/${MAXIMA_VERSION}/binary-sbcl/
 
 ## Update version numbers in 3 files in Maxima.app
 ## Copy file originals into the app bundle,
 ##  then replace old (static) version number with new
-perl -pi -w -e "s/5\.21\.1/$MAXIMA_VERSION/g" $APP_DIR/Contents/Info.plist
-perl -pi -w -e "s/5\.21\.1/$MAXIMA_VERSION/g" $APP_RESOURCES_DIR/English.lproj/InfoPlist.strings
-cp -f $BUILD_DIR/Maxima.app/Contents/Resources/bin/maxima $APP_RESOURCES_DIR/bin/maxima
-perl -pi -w -e "s/MAXIMA_VERSION=5\.21\.1/MAXIMA_VERSION=${MAXIMA_VERSION}/g" $APP_RESOURCES_DIR/bin/maxima
+perl -pi -w -e "s/5\.24\.0/$MAXIMA_VERSION/g" $APP_DIR/Contents/Info.plist
+perl -pi -w -e "s/5\.24\.0/$MAXIMA_VERSION/g" $APP_RESOURCES_DIR/English.lproj/InfoPlist.strings
+cp -f $BUILD_DIR/Maxima.app/Contents/Resources/maxima/bin/maxima $APP_RESOURCES_DIR/maxima/bin/maxima
+perl -pi -w -e "s/MAXIMA_VERSION=5\.24\.0/MAXIMA_VERSION=${MAXIMA_VERSION}/g" $APP_RESOURCES_DIR/maxima/bin/maxima
 
 ## Copy 3 elisp files that need fixes out of Maxima.app
 cp -f $APP_EMACS_DIR/imaxima.el $PLUGIN_DIR
@@ -90,26 +90,26 @@ patch -i $BUILD_DIR/lisp/maxima-el.diff maxima.el
 cp $BUILD_DIR/lisp/imaxima-autoloads.el ./
 cp $BUILD_DIR/lisp/site-start.el ./
 ## Symlink to untouched elisp & associated files deep with Maxima.app
-ln -s -Ff Maxima.app/Contents/Resources/share/maxima/${MAXIMA_VERSION}/emacs/maxima-font-lock.el
-ln -s -Ff Maxima.app/Contents/Resources/share/maxima/${MAXIMA_VERSION}/emacs/imaxima-autoconf-variables.el
-ln -s -Ff Maxima.app/Contents/Resources/share/maxima/${MAXIMA_VERSION}/emacs/imaxima.lisp
+ln -s -Ff Maxima.app/Contents/Resources/maxima/share/maxima/${MAXIMA_VERSION}/emacs/maxima-font-lock.el
+ln -s -Ff Maxima.app/Contents/Resources/maxima/share/maxima/${MAXIMA_VERSION}/emacs/imaxima-autoconf-variables.el
+ln -s -Ff Maxima.app/Contents/Resources/maxima/share/maxima/${MAXIMA_VERSION}/emacs/imaxima.lisp
 
 ## Symlink to info files
 mkdir $PLUGIN_DIR/info
 cd $PLUGIN_DIR/info
 cp $BUILD_DIR/info-dir ./dir
-ln -s -Ff ../Maxima.app/Contents/Resources/info/imaxima.info
-ln -s -Ff ../Maxima.app/Contents/Resources/info/maxima.info
-ln -s -Ff ../Maxima.app/Contents/Resources/info/maxima.info-1
-ln -s -Ff ../Maxima.app/Contents/Resources/info/maxima.info-2
-ln -s -Ff ../Maxima.app/Contents/Resources/info/maxima.info-3
-ln -s -Ff ../Gnuplot.app/Contents/Resources/share/info/gnuplot.info
+ln -s -Ff ../Maxima.app/Contents/Resources/maxima/info/imaxima.info
+ln -s -Ff ../Maxima.app/Contents/Resources/maxima/info/maxima.info
+ln -s -Ff ../Maxima.app/Contents/Resources/maxima/info/maxima.info-1
+ln -s -Ff ../Maxima.app/Contents/Resources/maxima/info/maxima.info-2
+ln -s -Ff ../Maxima.app/Contents/Resources/maxima/info/maxima.info-3
+ln -s -Ff ../Gnuplot.app/Contents/Resources/maxima/share/info/gnuplot.info
 
 ## Symlink to doc files
 mkdir $PLUGIN_DIR/doc
 cd $PLUGIN_DIR/doc
-ln -s -Ff ../Maxima.app/Contents/Resources/share/maxima/${MAXIMA_VERSION}/doc/html/maxima.html
-ln -s -Ff ../Maxima.app/Contents/Resources/share/maxima/${MAXIMA_VERSION}/doc/html/intromax.html
+ln -s -Ff ../Maxima.app/Contents/Resources/maxima/share/maxima/${MAXIMA_VERSION}/doc/html/maxima.html
+ln -s -Ff ../Maxima.app/Contents/Resources/maxima/share/maxima/${MAXIMA_VERSION}/doc/html/intromax.html
 ## Copy 2 PDFs from $BUILD_DIR
 cp -f $BUILD_DIR/maxima-src/doc/info/maxima.pdf ./
 cp -f $BUILD_DIR/maxima-src/interfaces/emacs/imaxima/imaxima.pdf ./
