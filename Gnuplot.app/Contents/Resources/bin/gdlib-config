@@ -56,7 +56,7 @@ while test $# -gt 0; do
 	echo $includedir
 	;;
     --version)
-	echo 2.0.34
+	echo 2.0.35
 	;;
     --majorversion)
 	echo 2
@@ -65,13 +65,13 @@ while test $# -gt 0; do
 	echo 0
 	;;
     --revision)
-	echo 34
+	echo 35
 	;;
     --ldflags)
-	echo  -L/tmp/gnuplot-i386/lib  -L/tmp/gnuplot-i386/lib -arch i386 -Wl,-headerpad_max_install_names -L/tmp/gnuplot-i386/lib -L/usr/X11R6/lib
+	echo  -L/tmp/gnuplot-i386/lib  -L/tmp/gnuplot-i386/lib -L/tmp/gnuplot-i386/lib -L/usr/lib -arch i386 -sse -sse2 -O2 -g -m32 -I/tmp/gnuplot-i386/include -I/usr/include -I/tmp/gnuplot-i386/X11/include/ -I/usr/X11/include -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/usr/X11/lib
 	;;
     --libs)
-	echo -lXpm -lX11 -ljpeg -lfontconfig -lfreetype -lpng12 -lz  -liconv
+	echo -lXpm -lX11 -ljpeg -lfontconfig -lfreetype -lpng -lz  -liconv
 	;;
     --cflags|--includes)
 	echo -I${prefix}/include
@@ -80,11 +80,11 @@ while test $# -gt 0; do
 	echo GD_XPM GD_JPEG GD_FONTCONFIG GD_FREETYPE GD_PNG GD_GIF GD_GIFANIM GD_OPENPOLYGON
 	;;
     --all)
-	echo "GD library  2.0.34"
+	echo "GD library  2.0.35"
 	echo "includedir: $includedir"
 	echo "cflags:     -I${prefix}/include"
-	echo "ldflags:     -L/tmp/gnuplot-i386/lib  -L/tmp/gnuplot-i386/lib -arch i386 -Wl,-headerpad_max_install_names -L/tmp/gnuplot-i386/lib -L/usr/X11R6/lib"
-	echo "libs:       -lXpm -lX11 -ljpeg -lfontconfig -lfreetype -lpng12 -lz  -liconv"
+	echo "ldflags:     -L/tmp/gnuplot-i386/lib  -L/tmp/gnuplot-i386/lib -L/tmp/gnuplot-i386/lib -L/usr/lib -arch i386 -sse -sse2 -O2 -g -m32 -I/tmp/gnuplot-i386/include -I/usr/include -I/tmp/gnuplot-i386/X11/include/ -I/usr/X11/include -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/usr/X11/lib"
+	echo "libs:       -lXpm -lX11 -ljpeg -lfontconfig -lfreetype -lpng -lz  -liconv"
 	echo "libdir:     $libdir"
 	echo "features:   GD_XPM GD_JPEG GD_FONTCONFIG GD_FREETYPE GD_PNG GD_GIF GD_GIFANIM GD_OPENPOLYGON"
 	;;

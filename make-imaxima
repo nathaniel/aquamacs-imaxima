@@ -1,11 +1,11 @@
 #!/bin/sh
 
 ## Specify current maxima version number (in file & directory names, etc.)
-MAXIMA_VERSION=5.23.2
+MAXIMA_VERSION=5.24.0
 ## Specify version number of the Imaxima plugin
 PLUGIN_VERSION=${MAXIMA_VERSION}_beta1
 ## Specify version number of gnuplot (only goes in to README)
-GNUPLOT_VERSION=4.2.6
+GNUPLOT_VERSION=4.4.3
 
 BUILD_DIR=`pwd`
 SBCL=`which sbcl`

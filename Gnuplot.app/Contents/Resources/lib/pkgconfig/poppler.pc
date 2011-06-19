@@ -1,0 +1,11 @@
+prefix=/tmp/gnuplot-i386
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: poppler
+Description: PDF rendering library
+Version: 0.16.4
+
+Libs: -L${libdir} -lpoppler
+Cflags: -I${includedir}/poppler

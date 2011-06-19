@@ -1,11 +1,11 @@
 This is history.info, produced by makeinfo version 4.13 from
-/Users/chet/src/bash/readline-src/doc/history.texi.
+/usr/src/local/chet/src/bash/readline-src/doc/history.texi.
 
-This document describes the GNU History library (version 6.0, 28
-October 2008), a programming tool that provides a consistent user
-interface for recalling lines of previously typed input.
+This document describes the GNU History library (version 6.2, September
+6 2010), a programming tool that provides a consistent user interface
+for recalling lines of previously typed input.
 
-   Copyright (C) 1988-2009 Free Software Foundation, Inc.
+   Copyright (C) 1988-2011 Free Software Foundation, Inc.
 
    Permission is granted to make and distribute verbatim copies of this
 manual provided the copyright notice and this permission notice are
@@ -13,7 +13,7 @@ preserved on all copies.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
-     Version 1.2 or any later version published by the Free Software
+     Version 1.3 or any later version published by the Free Software
      Foundation; with no Invariant Sections, with the Front-Cover texts
      being "A GNU Manual", and with the Back-Cover Texts as in (a)
      below.  A copy of the license is included in the section entitled
@@ -102,7 +102,8 @@ File: history.info,  Node: Event Designators,  Next: Word Designators,  Up: Hist
 -----------------------
 
 An event designator is a reference to a command line entry in the
-history list.  
+history list.  Unless the reference is absolute, events are relative to
+the current position in the history list.  
 
 `!'
      Start a history substitution, except when followed by a space, tab,
@@ -118,12 +119,13 @@ history list.
      Refer to the previous command.  This is a synonym for `!-1'.
 
 `!STRING'
-     Refer to the most recent command starting with STRING.
+     Refer to the most recent command preceding the current position in
+     the history list starting with STRING.
 
 `!?STRING[?]'
-     Refer to the most recent command containing STRING.  The trailing
-     `?' may be omitted if the STRING is followed immediately by a
-     newline.
+     Refer to the most recent command preceding the current position in
+     the history list containing STRING.  The trailing `?' may be
+     omitted if the STRING is followed immediately by a newline.
 
 `^STRING1^STRING2^'
      Quick Substitution.  Repeat the last command, replacing STRING1
@@ -642,6 +644,11 @@ GNU History Library.
      can be preserved between sessions.  The default value is 0,
      meaning that timestamps are not saved.
 
+     The current timestamp format uses the value of HISTORY_COMMENT_CHAR
+     to delimit timestamp entries in the history file.  If that
+     variable does not have a value (the default), timestamps will not
+     be written.
+
  -- Variable: char history_expansion_char
      The character that introduces a history event.  The default is `!'.
      Setting this to 0 inhibits history expansion.
@@ -784,10 +791,10 @@ File: history.info,  Node: GNU Free Documentation License,  Next: Concept Index,
 Appendix A GNU Free Documentation License
 *****************************************
 
-                      Version 1.2, November 2002
+                     Version 1.3, 3 November 2008
 
-     Copyright (C) 2000,2001,2002 Free Software Foundation, Inc.
-     51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA
+     Copyright (C) 2000, 2001, 2002, 2007, 2008 Free Software Foundation, Inc.
+     `http://fsf.org/'
 
      Everyone is permitted to copy and distribute verbatim copies
      of this license document, but changing it is not allowed.
@@ -888,6 +895,9 @@ Appendix A GNU Free Documentation License
      works in formats which do not have any title page as such, "Title
      Page" means the text near the most prominent appearance of the
      work's title, preceding the beginning of the body of the text.
+
+     The "publisher" means any person or entity that distributes copies
+     of the Document to the public.
 
      A section "Entitled XYZ" means a named subunit of the Document
      whose title either is precisely XYZ or contains XYZ in parentheses
@@ -1154,12 +1164,29 @@ Appendix A GNU Free Documentation License
   9. TERMINATION
 
      You may not copy, modify, sublicense, or distribute the Document
-     except as expressly provided for under this License.  Any other
-     attempt to copy, modify, sublicense or distribute the Document is
-     void, and will automatically terminate your rights under this
-     License.  However, parties who have received copies, or rights,
-     from you under this License will not have their licenses
-     terminated so long as such parties remain in full compliance.
+     except as expressly provided under this License.  Any attempt
+     otherwise to copy, modify, sublicense, or distribute it is void,
+     and will automatically terminate your rights under this License.
+
+     However, if you cease all violation of this License, then your
+     license from a particular copyright holder is reinstated (a)
+     provisionally, unless and until the copyright holder explicitly
+     and finally terminates your license, and (b) permanently, if the
+     copyright holder fails to notify you of the violation by some
+     reasonable means prior to 60 days after the cessation.
+
+     Moreover, your license from a particular copyright holder is
+     reinstated permanently if the copyright holder notifies you of the
+     violation by some reasonable means, this is the first time you have
+     received notice of violation of this License (for any work) from
+     that copyright holder, and you cure the violation prior to 30 days
+     after your receipt of the notice.
+
+     Termination of your rights under this section does not terminate
+     the licenses of parties who have received copies or rights from
+     you under this License.  If your rights have been terminated and
+     not permanently reinstated, receipt of a copy of some or all of
+     the same material does not give you any rights to use it.
 
  10. FUTURE REVISIONS OF THIS LICENSE
 
@@ -1177,7 +1204,41 @@ Appendix A GNU Free Documentation License
      published (not as a draft) by the Free Software Foundation.  If
      the Document does not specify a version number of this License,
      you may choose any version ever published (not as a draft) by the
-     Free Software Foundation.
+     Free Software Foundation.  If the Document specifies that a proxy
+     can decide which future versions of this License can be used, that
+     proxy's public statement of acceptance of a version permanently
+     authorizes you to choose that version for the Document.
+
+ 11. RELICENSING
+
+     "Massive Multiauthor Collaboration Site" (or "MMC Site") means any
+     World Wide Web server that publishes copyrightable works and also
+     provides prominent facilities for anybody to edit those works.  A
+     public wiki that anybody can edit is an example of such a server.
+     A "Massive Multiauthor Collaboration" (or "MMC") contained in the
+     site means any set of copyrightable works thus published on the MMC
+     site.
+
+     "CC-BY-SA" means the Creative Commons Attribution-Share Alike 3.0
+     license published by Creative Commons Corporation, a not-for-profit
+     corporation with a principal place of business in San Francisco,
+     California, as well as future copyleft versions of that license
+     published by that same organization.
+
+     "Incorporate" means to publish or republish a Document, in whole or
+     in part, as part of another Document.
+
+     An MMC is "eligible for relicensing" if it is licensed under this
+     License, and if all works that were first published under this
+     License somewhere other than this MMC, and subsequently
+     incorporated in whole or in part into the MMC, (1) had no cover
+     texts or invariant sections, and (2) were thus incorporated prior
+     to November 1, 2008.
+
+     The operator of an MMC Site may republish an MMC contained in the
+     site under CC-BY-SA on the same site at any time before August 1,
+     2009, provided the MMC is eligible for relicensing.
+
 
 ADDENDUM: How to use this License for your documents
 ====================================================
@@ -1188,7 +1249,7 @@ notices just after the title page:
 
        Copyright (C)  YEAR  YOUR NAME.
        Permission is granted to copy, distribute and/or modify this document
-       under the terms of the GNU Free Documentation License, Version 1.2
+       under the terms of the GNU Free Documentation License, Version 1.3
        or any later version published by the Free Software Foundation;
        with no Invariant Sections, no Front-Cover Texts, and no Back-Cover
        Texts.  A copy of the license is included in the section entitled ``GNU
@@ -1222,7 +1283,7 @@ Appendix B Concept Index
 * anchored search:                       Searching the History List.
                                                                (line 10)
 * event designators:                     Event Designators.    (line  6)
-* history events:                        Event Designators.    (line  7)
+* history events:                        Event Designators.    (line  8)
 * history expansion:                     History Interaction.  (line  6)
 * History Searching:                     Searching the History List.
                                                                (line  6)
@@ -1251,27 +1312,27 @@ Appendix C Function and Variable Index
 * get_history_event:                     History Expansion.    (line 31)
 * history_arg_extract:                   History Expansion.    (line 46)
 * history_base:                          History Variables.    (line 10)
-* history_comment_char:                  History Variables.    (line 33)
+* history_comment_char:                  History Variables.    (line 38)
 * history_expand:                        History Expansion.    (line  9)
-* history_expansion_char:                History Variables.    (line 25)
+* history_expansion_char:                History Variables.    (line 30)
 * history_get:                           Information About the History List.
                                                                (line 23)
 * history_get_history_state:             Initializing History and State Management.
                                                                (line 15)
 * history_get_time:                      Information About the History List.
                                                                (line 29)
-* history_inhibit_expansion_function:    History Variables.    (line 57)
+* history_inhibit_expansion_function:    History Variables.    (line 62)
 * history_is_stifled:                    History List Management.
                                                                (line 47)
 * history_length:                        History Variables.    (line 13)
 * history_list:                          Information About the History List.
                                                                (line 10)
 * history_max_entries:                   History Variables.    (line 16)
-* history_no_expand_chars:               History Variables.    (line 48)
-* history_quotes_inhibit_expansion:      History Variables.    (line 53)
+* history_no_expand_chars:               History Variables.    (line 53)
+* history_quotes_inhibit_expansion:      History Variables.    (line 58)
 * history_search:                        Searching the History List.
                                                                (line 13)
-* history_search_delimiter_chars:        History Variables.    (line 43)
+* history_search_delimiter_chars:        History Variables.    (line 48)
 * history_search_pos:                    Searching the History List.
                                                                (line 33)
 * history_search_prefix:                 Searching the History List.
@@ -1280,13 +1341,13 @@ Appendix C Function and Variable Index
                                                                (line 19)
 * history_set_pos:                       Moving Around the History List.
                                                                (line 10)
-* history_subst_char:                    History Variables.    (line 29)
+* history_subst_char:                    History Variables.    (line 34)
 * history_tokenize:                      History Expansion.    (line 39)
 * history_total_bytes:                   Information About the History List.
                                                                (line 32)
 * history_truncate_file:                 Managing the History File.
                                                                (line 35)
-* history_word_delimiters:               History Variables.    (line 39)
+* history_word_delimiters:               History Variables.    (line 44)
 * history_write_timestamps:              History Variables.    (line 20)
 * next_history:                          Moving Around the History List.
                                                                (line 20)
@@ -1314,27 +1375,27 @@ Appendix C Function and Variable Index
 
 
 Tag Table:
-Node: Top1305
-Node: Using History Interactively1950
-Node: History Interaction2458
-Node: Event Designators3882
-Node: Word Designators4817
-Node: Modifiers6456
-Node: Programming with GNU History7681
-Node: Introduction to History8424
-Node: History Storage10114
-Node: History Functions11249
-Node: Initializing History and State Management12238
-Node: History List Management13050
-Node: Information About the History List15082
-Node: Moving Around the History List16579
-Node: Searching the History List17580
-Node: Managing the History File19512
-Node: History Expansion21332
-Node: History Variables23240
-Node: History Programming Example26046
-Node: GNU Free Documentation License28723
-Node: Concept Index51179
-Node: Function and Variable Index51884
+Node: Top1314
+Node: Using History Interactively1959
+Node: History Interaction2467
+Node: Event Designators3891
+Node: Word Designators5033
+Node: Modifiers6672
+Node: Programming with GNU History7897
+Node: Introduction to History8640
+Node: History Storage10330
+Node: History Functions11465
+Node: Initializing History and State Management12454
+Node: History List Management13266
+Node: Information About the History List15298
+Node: Moving Around the History List16795
+Node: Searching the History List17796
+Node: Managing the History File19728
+Node: History Expansion21548
+Node: History Variables23456
+Node: History Programming Example26488
+Node: GNU Free Documentation License29165
+Node: Concept Index54356
+Node: Function and Variable Index55061
 
 End Tag Table

@@ -1,4 +1,4 @@
-CFBundleName = "Gnuplot.app";
-CFBundleShortVersionString = "4.2.6";
-CFBundleGetInfoString = "Gnuplot.app version 4.2.6 Copyright 2009 Thomas Williams, Colin Kelley, Russell Lang, Dave Kotz, John Campbell,     Gershon Elber, Alexander Woo and many others";
-NSHumanReadableCopyright = "Copyright 2009 Thomas Williams, Colin Kelley, Russell Lang, Dave Kotz, John Campbell,     Gershon Elber, Alexander Woo and many others.";
+CFBundleName = "Gnuplot";
+CFBundleShortVersionString = "4.4.3";
+CFBundleGetInfoString = "Gnuplot version 4.4.3 Copyright 2011 Thomas Williams, Colin Kelley, Russell Lang, Dave Kotz, John Campbell, Gershon Elber, Alexander Woo and many others";
+NSHumanReadableCopyright = "Copyright 2011 Thomas Williams, Colin Kelley, Russell Lang, Dave Kotz, John Campbell, Gershon Elber, Alexander Woo and many others.";

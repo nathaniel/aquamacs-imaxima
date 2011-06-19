@@ -1,0 +1,13 @@
+prefix=/tmp/gnuplot-i386
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: poppler-cpp
+Description: cpp backend for Poppler PDF rendering library
+Version: 0.16.4
+Requires: 
+Requires.private: poppler = 0.16.4
+
+Libs: -L${libdir} -lpoppler-cpp
+Cflags: -I${includedir}/poppler/cpp
