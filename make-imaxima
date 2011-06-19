@@ -60,7 +60,7 @@ rmdir maxima
 
 ## Copy build machine's SBCL binary into Maxima.app
 ## (avoid runtime dependency on separate SBCL)
-cp -f $SBCL $APP_RESOURCES_DIR/maxima/lib/maxima/${MAXIMA_VERSION}/binary-sbcl/
+cp -f $SBCL $APP_RESOURCES_DIR/maxima/bin/
 
 ## Update version numbers in 3 files in Maxima.app
 ## Copy file originals into the app bundle,
