@@ -90,9 +90,9 @@ patch -i $BUILD_DIR/lisp/maxima-el.diff maxima.el
 cp $BUILD_DIR/lisp/imaxima-autoloads.el ./
 cp $BUILD_DIR/lisp/site-start.el ./
 ## Symlink to untouched elisp & associated files deep with Maxima.app
-ln -s -Ff Maxima.app/Contents/Resources/share/maxima/5.23.2/emacs/maxima-font-lock.el
-ln -s -Ff Maxima.app/Contents/Resources/share/maxima/5.23.2/emacs/imaxima-autoconf-variables.el
-ln -s -Ff Maxima.app/Contents/Resources/share/maxima/5.23.2/emacs/imaxima.lisp
+ln -s -Ff Maxima.app/Contents/Resources/share/maxima/${MAXIMA_VERSION}/emacs/maxima-font-lock.el
+ln -s -Ff Maxima.app/Contents/Resources/share/maxima/${MAXIMA_VERSION}/emacs/imaxima-autoconf-variables.el
+ln -s -Ff Maxima.app/Contents/Resources/share/maxima/${MAXIMA_VERSION}/emacs/imaxima.lisp
 
 ## Symlink to info files
 mkdir $PLUGIN_DIR/info
