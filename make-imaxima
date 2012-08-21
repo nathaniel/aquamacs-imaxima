@@ -1,5 +1,10 @@
 #!/bin/sh
 
+set -euv
+## -e: exit on error
+## -u: check for unset variables; exit if any found
+## -v: print command being executed, right before executing
+
 ## Specify current maxima version number (in file & directory names, etc.)
 MAXIMA_VERSION=5.23.2
 ## Specify version number of the Imaxima plugin
@@ -25,7 +30,7 @@ tar xzf maxima.tar.gz
 rm -rf maxima-src
 mv maxima-${MAXIMA_VERSION} maxima-src
 cd $BUILD_DIR/maxima-src
-./configure --prefix=$ROOT --mandir=$ROOT/man --infodir=$ROOT/info --enable-sbcl
+./configure --prefix=/ --mandir=/man --infodir=/info --enable-sbcl
 make
 make pdf
 ## install in specified DESTDIR
