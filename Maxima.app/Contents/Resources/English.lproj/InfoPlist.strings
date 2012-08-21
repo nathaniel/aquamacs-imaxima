@@ -1,4 +1,0 @@
-CFBundleName = "Maxima";
-CFBundleShortVersionString = "5.24.0";
-CFBundleGetInfoString = "Maxima version 5.24.0 Copyright 2011 Maxima Developement team";
-NSHumanReadableCopyright = "Copyright 2011 Maxima Developement team.";

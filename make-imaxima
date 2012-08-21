@@ -6,7 +6,7 @@ set -euv
 ## -v: print command being executed, right before executing
 
 ## Specify current maxima version number (in file & directory names, etc.)
-MAXIMA_VERSION=5.24.0
+MAXIMA_VERSION=5.28.0
 ## Specify version number of the Imaxima plugin
 PLUGIN_VERSION=${MAXIMA_VERSION}_beta1
 ## Specify version number of gnuplot (only goes in to README)
@@ -70,10 +70,10 @@ cp -f $SBCL $APP_RESOURCES_DIR/maxima/bin/
 ## Update version numbers in 3 files in Maxima.app
 ## Copy file originals into the app bundle,
 ##  then replace old (static) version number with new
-perl -pi -w -e "s/5\.24\.0/$MAXIMA_VERSION/g" $APP_DIR/Contents/Info.plist
-perl -pi -w -e "s/5\.24\.0/$MAXIMA_VERSION/g" $APP_RESOURCES_DIR/English.lproj/InfoPlist.strings
+perl -pi -w -e "s/5\.27\.0/$MAXIMA_VERSION/g" $APP_DIR/Contents/Info.plist
+# perl -pi -w -e "s/5\.27\.0/$MAXIMA_VERSION/g" $APP_RESOURCES_DIR/English.lproj/InfoPlist.strings   # file is missing from latest Maxima.app
 cp -f $BUILD_DIR/Maxima.app/Contents/Resources/maxima/bin/maxima $APP_RESOURCES_DIR/maxima/bin/maxima
-perl -pi -w -e "s/MAXIMA_VERSION=5\.24\.0/MAXIMA_VERSION=${MAXIMA_VERSION}/g" $APP_RESOURCES_DIR/maxima/bin/maxima
+perl -pi -w -e "s/MAXIMA_VERSION=5\.27\.0/MAXIMA_VERSION=${MAXIMA_VERSION}/g" $APP_RESOURCES_DIR/maxima/bin/maxima
 
 ## Copy 3 elisp files that need fixes out of Maxima.app
 cp -f $APP_EMACS_DIR/imaxima.el $PLUGIN_DIR

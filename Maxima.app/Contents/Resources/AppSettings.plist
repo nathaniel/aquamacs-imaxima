@@ -5,7 +5,7 @@
 	<key>AppPathAsFirstArg</key>
 	<true/>
 	<key>Creator</key>
-	<string>Platypus-4.4</string>
+	<string>Platypus-4.5</string>
 	<key>Droppable</key>
 	<false/>
 	<key>InterpreterParams</key>
